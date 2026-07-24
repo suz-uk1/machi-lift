@@ -1,93 +1,181 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>machi-lift｜Googleマップ掲載改善レポート</title>
-  <meta name="description" content="machi-liftは、店舗のGoogleマップ掲載を改善するための診断レポートを提供します。掲載情報の見直し・写真・説明文・投稿・FAQの改善案をPDFでお届けします。">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js')</script>
+<title>まちのWeb改善室｜Googleマップ掲載改善レポート（machi-lift）</title>
+<meta name="description" content="まちのWeb改善室（machi-lift）は、店舗のGoogleマップ掲載を第三者視点で診断し、写真・説明文・投稿・FAQなどの改善案と反映手順をPDFレポートでお届けします。">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">machi<span>-</span>lift</a>
-      <nav class="site-nav">
-        <a href="#service">サービス</a>
-        <a href="#pricing">料金</a>
-        <a href="#contact">お問い合わせ</a>
-        <a href="tokushoho.html">特定商取引法に基づく表記</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header"><div class="container">
+  <a class="brand" href="index.html"><img src="assets/logo.svg" alt="machi-lift"></a>
+  <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">≡</button>
+  <nav class="nav">
+    <a href="#service">サービス</a><a href="#flow">ご依頼の流れ</a><a href="#pricing">料金</a>
+    <a href="#faq">よくある質問</a><a class="btn btn--primary" href="#contact">お問い合わせ</a>
+  </nav>
+</div></header>
+<main>
 
-  <div class="hero">
+  <section class="hero">
     <div class="container">
-      <h1>店舗のGoogleマップ掲載を、<br>「伝わる」状態に整えるレポート。</h1>
-      <p>machi-liftは、店舗のGoogleマップ掲載情報を分析し、改善のための具体的な素材と手順をまとめたレポート（PDF）をお届けするサービスです。掲載の見直し・写真・説明文・投稿文・FAQなどを、そのまま反映できる形でご提案します。</p>
-      <a class="btn" href="#service">サービス内容を見る</a>
+      <h1>まちのWeb改善室</h1>
+      <p class="sub">店舗のGoogleマップ掲載を、「伝わる」状態に整えるレポート。</p>
+      <p>Googleマップの掲載情報を第三者の視点で診断し、写真・説明文・投稿文・FAQなどの改善案を、そのまま反映できる素材と手順にまとめてPDFでお届けします。作業のために店舗へ立ち会っていただく必要はありません。</p>
+      <div class="cta">
+        <a class="btn btn--primary" href="#contact">お問い合わせ</a>
+        <a class="btn btn--ghost" href="#service">サービスを見る</a>
+      </div>
+      <div class="trust-bar">
+        <span>福岡市中央区</span>
+        <span><a href="mailto:info@machi-lift.com">info@machi-lift.com</a></span>
+        <span><a href="tokushoho.html">特定商取引法に基づく表記</a></span>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <main>
-    <section id="service">
-      <div class="container">
-        <h2>Googleマップ掲載改善パック</h2>
-        <p class="page-lead">お店のGoogleマップ掲載を第三者の視点で診断し、「何を・どう直すか」を具体的な素材付きでまとめてお渡しします。作業のために店舗に立ち会っていただく必要はありません。</p>
-        <ul class="features">
-          <li><strong>掲載改善診断</strong>／現在のGoogleマップ掲載情報を確認し、改善できる点を整理します。</li>
-          <li><strong>写真の追加・並び替えリスト</strong>／どんな写真を、どの順番で見せると伝わりやすいかをご提案します。</li>
-          <li><strong>店舗説明文の改善案</strong>／お店の魅力が伝わる説明文の文案をご用意します。</li>
-          <li><strong>投稿文案</strong>／Googleマップの投稿に使える文案をご提案します。</li>
-          <li><strong>FAQ案</strong>／よくある質問と回答の案をまとめます。</li>
-          <li><strong>公式サイト・予約導線とのつなぎ方</strong>／掲載情報から予約・問い合わせへつなぐ導線を整理します。</li>
-          <li><strong>実際の反映手順</strong>／ご自身で反映いただけるよう、手順もあわせてお渡しします。</li>
+  <section class="section reveal" id="service">
+    <div class="container">
+      <h2>Googleマップ掲載改善パック</h2>
+      <p class="lead">お店のGoogleマップ掲載を第三者の視点で診断し、「何を・どう直すか」を具体的な素材付きでまとめてお渡しします。</p>
+      <ul class="grid grid-3 features">
+        <li class="card"><strong>掲載改善診断</strong>検索する人の目線で、いまの掲載のどこが伝わりにくいかを一つずつ洗い出します。</li>
+        <li class="card"><strong>写真の追加・並び替えリスト</strong>どの写真をどの順で見せると特徴が伝わるか、具体的な並び順の案をお渡しします。</li>
+        <li class="card"><strong>店舗説明文の改善案</strong>最初の1〜2行で選ばれる理由が伝わるよう、そのまま貼れる説明文案をご用意します。</li>
+        <li class="card"><strong>投稿文案</strong>何をいつ投稿すると来店前の不安が減るか、そのまま使える投稿の下書きをまとめます。</li>
+        <li class="card"><strong>FAQ案</strong>よく聞かれることに先回りして答える、掲載に載せられるFAQ案をご提案します。</li>
+        <li class="card"><strong>公式サイト・予約導線とのつなぎ方</strong>Googleマップから予約や問い合わせへ迷わず進めるよう、導線の整え方をご案内します。</li>
+        <li class="card"><strong>実際の反映手順</strong>どこを・どの順で直すか、お手元で操作できる手順書にまとめてお届けします。</li>
+      </ul>
+      <p class="notice">※ 本サービスは掲載情報の改善提案（レポート納品）です。検索順位の保証や売上の保証を行うものではありません。口コミの獲得代行や、Googleマップの運用代行は含みません。</p>
+    </div>
+  </section>
+
+  <section class="section section--soft reveal" id="sample">
+    <div class="container sample">
+      <h2>納品物のイメージ</h2>
+      <p class="lead">ご依頼ごとに内容は変わりますが、こうしたレポート（PDF）としてお届けします。</p>
+      <div class="shots">
+        <img src="assets/report-1.png" alt="納品レポートのイメージ">
+        <img src="assets/report-2.png" alt="納品レポートのイメージ">
+        <img src="assets/report-3.png" alt="納品レポートのイメージ">
+      </div>
+      <p class="cap">※ イメージです。実際の内容は店舗ごとに作成します。</p>
+    </div>
+  </section>
+
+  <section class="section reveal" id="reasons">
+    <div class="container">
+      <h2>選ばれる理由</h2>
+      <div class="reasons grid grid-3">
+        <div class="card">
+          <h3>立ち会い不要</h3>
+          <p>店舗での作業立ち会いは不要。公開情報をもとに診断し、レポートでお渡しします。</p>
+        </div>
+        <div class="card">
+          <h3>第三者視点の診断</h3>
+          <p>検索する人の目線で、掲載の「伝わりにくい点」を客観的に洗い出します。</p>
+        </div>
+        <div class="card">
+          <h3>そのまま反映できる素材付き</h3>
+          <p>説明文案・投稿文案・写真の並び順・反映手順まで、すぐ使える形でまとめます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft reveal" id="flow">
+    <div class="container">
+      <h2>ご依頼の流れ</h2>
+      <div class="flow">
+        <div class="step"><div class="num">1</div><div><h3>お問い合わせ</h3><p>メールでご連絡ください。</p></div></div>
+        <div class="step"><div class="num">2</div><div><h3>無料の簡単な改善メモ</h3><p>気になった点を数点、無料でお送りします。</p></div></div>
+        <div class="step"><div class="num">3</div><div><h3>パックのご案内</h3><p>ご希望の場合、Googleマップ掲載改善パック 税込9,800円をご案内します。</p></div></div>
+        <div class="step"><div class="num">4</div><div><h3>お支払い</h3><p>クレジットカード決済（Stripe）で承ります。</p></div></div>
+        <div class="step"><div class="num">5</div><div><h3>レポート納品</h3><p>必要情報のご提供後、3〜5営業日でPDFをお届けします。</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="owner">
+    <div class="container--text owner">
+      <h2>運営者について</h2>
+      <div class="card">
+        <div class="avatar" aria-hidden="true">S</div>
+        <div>
+          <p class="who">まちのWeb改善室 ／ 鈴木 秀幸</p>
+          <p>地域のお店のGoogleマップや公式サイトを見ていると、良いお店なのに掲載で「もったいない」ことが少なくありません。まちのWeb改善室は、そうした掲載を検索する人に「伝わる」状態へ整えるお手伝いをしています。売上や順位をうたうのではなく、いま整えられる点を具体的な素材にしてお渡しすることを大切にしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft reveal" id="pricing">
+    <div class="container--text pricing">
+      <h2>料金・納期</h2>
+      <div class="card">
+        <span class="price-badge">導入価格</span>
+        <p class="price-main">9,800円<span style="font-size:1rem;font-weight:600;color:var(--text-soft)">（税込）</span></p>
+        <ul>
+          <li>納品形式：PDFレポート</li>
+          <li>納期：必要情報のご提供後、3〜5営業日</li>
+          <li>お支払い：クレジットカード決済（Stripe）</li>
         </ul>
-        <div class="notice">
-          ※ 本サービスは掲載情報の改善提案（レポート納品）です。検索順位の保証や売上の保証を行うものではありません。口コミの獲得代行や、Googleマップの運用代行は含みません。
-        </div>
+        <p class="note">サービス開始記念の導入価格です。今後改定の可能性があります。</p>
       </div>
-    </section>
-
-    <section id="pricing">
-      <div class="container">
-        <h2>料金・納期</h2>
-        <div class="pricing">
-          <div class="price-row">
-            <span class="price-tag">初回店舗向け</span>
-          </div>
-          <div class="price-row" style="margin-top:8px;">
-            <span class="price-main">9,800円</span>
-            <span class="price-standard">標準 19,800円</span>
-            <span style="color:var(--text-soft);font-size:0.9rem;">（税込）</span>
-          </div>
-          <ul>
-            <li>納品形式：PDFレポート</li>
-            <li>納期：必要情報のご提供後、3〜5営業日</li>
-            <li>お支払い：クレジットカード決済（Stripe）</li>
-          </ul>
-        </div>
-        <p style="color:var(--text-soft);font-size:0.9rem;margin-top:16px;">初回価格は、サービス開始にあたっての導入価格です。ご依頼の流れ・必要情報については、お問い合わせ後にご案内します。</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <h2>お問い合わせ</h2>
-        <p class="page-lead">サービスに関するご質問・ご依頼は、メールにて承ります。</p>
-        <p>メール：<a href="mailto:info@machi-lift.com">info@machi-lift.com</a></p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div>© 2026 machi-lift</div>
-      <nav>
-        <a href="tokushoho.html">特定商取引法に基づく表記</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-      </nav>
     </div>
-  </footer>
+  </section>
+
+  <section class="section reveal" id="faq">
+    <div class="container--text faq">
+      <h2>よくある質問</h2>
+      <details class="faq-item">
+        <summary>メールが届いたのですが、これは営業ですか？</summary>
+        <div class="a">はい、こちらからお声がけのご連絡です。Googleマップなどの公開情報を拝見し、掲載で改善できそうな点があると感じたお店に個別でご連絡しています。押し売りはいたしません。まずは無料の簡単な改善メモをお送りするだけですので、ご不要な場合は返信いただかなくて問題ありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>検索順位は上がりますか？</summary>
+        <div class="a">検索順位や売上を保証するサービスではありません。掲載情報が検索する人に「伝わる」状態になるよう、具体的な改善案と素材をお渡しするものです。</div>
+      </details>
+      <details class="faq-item">
+        <summary>Googleマップの運用や口コミ集めを代行してもらえますか？</summary>
+        <div class="a">いいえ。運用代行や口コミの獲得代行は行っておりません。改善のための提案とそのまま使える素材・手順のご提供（レポート納品）が対象です。</div>
+      </details>
+      <details class="faq-item">
+        <summary>作業に立ち会う必要はありますか？</summary>
+        <div class="a">ございません。公開情報をもとに診断・作成し、PDFレポートでお渡しします。反映はお手元の手順書に沿ってご自身で行っていただけます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>キャンセル・返金はできますか？</summary>
+        <div class="a">作成に着手する前であれば全額返金いたします。また、納品物に事実誤りや不備があった場合は無償で修正いたします。</div>
+      </details>
+      <details class="faq-item">
+        <summary>どのような形式で納品されますか？</summary>
+        <div class="a">PDFレポートでお届けします。必要な情報をご提供いただいてから、3〜5営業日ほどが目安です。</div>
+      </details>
+      <details class="faq-item">
+        <summary>支払い方法は？</summary>
+        <div class="a">クレジットカード決済（Stripe）に対応しています。</div>
+      </details>
+    </div>
+  </section>
+
+  <section class="section section--soft reveal" id="contact">
+    <div class="container--text">
+      <h2>お問い合わせ</h2>
+      <p class="lead">サービスに関するご質問・ご依頼は、メールにて承ります。</p>
+      <p class="contact-mail"><a href="mailto:info@machi-lift.com">info@machi-lift.com</a></p>
+    </div>
+  </section>
+
+</main>
+<footer class="site-footer"><div class="container">
+  <div>© 2026 まちのWeb改善室（machi-lift）</div>
+  <div class="foot-name">運営: 鈴木 秀幸</div>
+  <nav><a href="tokushoho.html">特定商取引法に基づく表記</a>　<a href="privacy.html">プライバシーポリシー</a></nav>
+</div></footer>
+<script src="main.js"></script>
 </body>
 </html>
