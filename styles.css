@@ -108,6 +108,9 @@ html.js .reveal.is-in{opacity:1;transform:none}
 .hero--sub h1{font-size:2rem}
 .hero--sub p{margin-bottom:0}
 .container--doc{max-width:880px}
+.container--doc h2{text-align:center}
+.container--doc .lead{text-align:center;margin-left:auto;margin-right:auto}
+.container--doc > .cap{text-align:center}
 .container--doc .report-doc{margin:0 auto}
 #cta{text-align:center}
 #cta .lead{margin:0 auto 32px}
