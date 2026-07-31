@@ -132,5 +132,29 @@
   <nav><a href="tokushoho.html">特定商取引法に基づく表記</a>　<a href="privacy.html">プライバシーポリシー</a></nav>
 </div></footer>
 <script src="main.js"></script>
+<script>
+// 閲覧記録ビーコン: 案内メール/フォーム経由（?r=<id>）の閲覧のみ記録。
+// 記録先は運用用Googleフォーム（公開値）。個人情報は送信しない。
+(function () {
+  try {
+    var r = new URLSearchParams(location.search).get('r');
+    if (!r || !/^[A-Za-z0-9\-]{4,40}$/.test(r)) return;
+    var key = 'ml_sv_' + r;
+    if (sessionStorage.getItem(key)) return;
+    setTimeout(function () {
+      if (document.visibilityState !== 'visible') return;
+      var fd = new FormData();
+      fd.append('entry.2074492921', r);
+      fd.append('entry.825755304', 'sample_view');
+      fd.append('entry.789135618', new Date().toISOString());
+      fetch('https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: fd
+      }).then(function () { sessionStorage.setItem(key, '1'); }).catch(function () {});
+    }, 1500);
+  } catch (e) { /* no-op */ }
+})();
+</script>
 </body>
 </html>
