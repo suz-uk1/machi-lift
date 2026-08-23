@@ -116,11 +116,18 @@
 
   <section class="section section--soft reveal" id="cta">
     <div class="container container--doc">
-      <h2>この形で、あなたのお店に合わせて作成します</h2>
-      <p class="lead">導入価格 税込9,800円・必要情報のご提供後1〜3営業日でお届けします。</p>
+      <h2>まずは、あなたのお店の改善メモを無料でお送りします</h2>
+      <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
       <div class="cta">
-        <a class="btn btn--primary" href="https://buy.stripe.com/7sYbJ25mU6V95kP9gI53O0j" target="_blank" rel="noopener">このレポートを申し込む（税込9,800円）</a>
+        <a class="btn btn--primary" id="memo-cta" href="mailto:info@machi-lift.com?subject=%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E5%B8%8C%E6%9C%9B">専用の改善メモを無料で受け取る</a>
         <a class="btn btn--ghost" href="index.html#contact">まずは相談する</a>
+      </div>
+      <p class="cap">ボタンを押すとメールソフトが開き、件名に「サンプル希望」が入ります。そのまま送信いただければ、内容の記入は不要です。うまく開かない場合は info@machi-lift.com へ「サンプル希望」とご連絡ください。</p>
+
+      <h3 style="margin-top:2.2rem">レポート本編をご希望の場合</h3>
+      <p>導入価格 税込9,800円・必要情報のご提供後1〜3営業日でお届けします。</p>
+      <div class="cta">
+        <a class="btn btn--ghost" href="https://buy.stripe.com/7sYbJ25mU6V95kP9gI53O0j" target="_blank" rel="noopener">このレポートを申し込む（税込9,800円）</a>
       </div>
       <p class="cap">お申し込み（クレジットカード決済）後、作成に必要な情報（Googleマップ掲載ページのURLなど）を決済時のメールアドレス宛にお伺いし、ご提供いただいてから1〜3営業日でお届けします。</p>
     </div>
@@ -165,6 +172,17 @@
     if (document.visibilityState === 'visible') send('sample_view');
   }, 1500);
 
+  // 無料メモCTA: 案内経由(?r=)なら件名に受付番号を入れて誰からの依頼か判別できるようにする
+  var memo = document.getElementById('memo-cta');
+  if (memo) {
+    memo.href = 'mailto:info@machi-lift.com'
+      + '?subject=' + encodeURIComponent('サンプル希望（' + r + '）')
+      + '&body=' + encodeURIComponent(
+          'まちのWeb改善室 ご担当者さま\n\n'
+          + '専用の改善メモ（無料）を希望します。\nこのまま送信いただければ結構です。\n\n'
+          + '受付番号: ' + r + '\n');
+  }
+
   // 読了度: 表示領域の下端がページの50%/90%に達したら記録
   var fired = {};
   function onScroll() {
@@ -180,7 +198,8 @@
   document.addEventListener('click', function (ev) {
     var a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
     if (!a || !a.href) return;
-    if (a.href.indexOf('buy.stripe.com') !== -1) send('sample_cta_pay');
+    if (a.id === 'memo-cta' || a.href.indexOf('mailto:info@machi-lift.com') === 0) send('sample_cta_memo');
+    else if (a.href.indexOf('buy.stripe.com') !== -1) send('sample_cta_pay');
     else if (a.getAttribute('href') === 'index.html#contact') send('sample_cta_consult');
   }, true);
 })();
