@@ -136,25 +136,53 @@
 <script>
 // 閲覧記録ビーコン: 案内メール/フォーム経由（?r=<id>）の閲覧のみ記録。
 // 記録先は運用用Googleフォーム（公開値）。個人情報は送信しない。
+// 2026-08-23: 到達だけでなく「どこまで読んだか」「CTAを押したか」を記録する。
+// 「開いたが返信しない」層の内訳（即離脱／読了して迷う／CTAまで到達）を判別するため。
 (function () {
+  var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse';
+  var r;
   try {
-    var r = new URLSearchParams(location.search).get('r');
+    r = new URLSearchParams(location.search).get('r');
     if (!r || !/^[A-Za-z0-9\-]{4,40}$/.test(r)) return;
-    var key = 'ml_sv_' + r;
-    if (sessionStorage.getItem(key)) return;
-    setTimeout(function () {
-      if (document.visibilityState !== 'visible') return;
+  } catch (e) { return; }
+
+  // 同一セッションで同じイベントは1回だけ送る
+  function send(kind) {
+    try {
+      var key = 'ml_' + kind + '_' + r;
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, '1');
       var fd = new FormData();
       fd.append('entry.2074492921', r);
-      fd.append('entry.825755304', 'sample_view');
+      fd.append('entry.825755304', kind);
       fd.append('entry.789135618', new Date().toISOString());
-      fetch('https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: fd
-      }).then(function () { sessionStorage.setItem(key, '1'); }).catch(function () {});
-    }, 1500);
-  } catch (e) { /* no-op */ }
+      fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: fd, keepalive: true })
+        .catch(function () {});
+    } catch (e) { /* no-op */ }
+  }
+
+  setTimeout(function () {
+    if (document.visibilityState === 'visible') send('sample_view');
+  }, 1500);
+
+  // 読了度: 表示領域の下端がページの50%/90%に達したら記録
+  var fired = {};
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (h <= 0) return;
+    var pct = (window.scrollY / h) * 100;
+    if (pct >= 50 && !fired['50']) { fired['50'] = 1; send('sample_scroll50'); }
+    if (pct >= 90 && !fired['90']) { fired['90'] = 1; send('sample_scroll90'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // CTA: 申込（Stripe）／相談 の押下
+  document.addEventListener('click', function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
+    if (!a || !a.href) return;
+    if (a.href.indexOf('buy.stripe.com') !== -1) send('sample_cta_pay');
+    else if (a.getAttribute('href') === 'index.html#contact') send('sample_cta_consult');
+  }, true);
 })();
 </script>
 </body>
