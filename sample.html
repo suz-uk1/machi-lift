@@ -125,17 +125,23 @@
       <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
 
       <div id="memo-done" style="display:none">
-        <p style="font-weight:700;color:#1f5c23;background:#e8f3e9;border:1px solid #c6e2c8;border-radius:10px;padding:12px 14px;margin:0 0 12px">
+        <p id="memo-done-msg" style="font-weight:700;color:#1f5c23;background:#e8f3e9;border:1px solid #c6e2c8;border-radius:10px;padding:12px 14px;margin:0 0 12px">
           お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。
         </p>
         <div id="memo-mail-block">
           <p class="cap" id="memo-mail-label">送付先のメールアドレス（任意）。ご記入いただくと確実にお届けできます。</p>
+          <div id="memo-shop-row" style="display:none;margin:0 0 10px">
+            <input type="text" id="memo-shop" placeholder="店名、またはGoogleマップのURL"
+                   style="font:inherit;padding:10px 12px;border:1px solid #cfd8d2;border-radius:9px;width:100%;max-width:32em">
+            <p class="cap" style="margin:4px 0 0">どのお店の掲載を拝見すればよいか分かる情報をご記入ください（店名＋市区町村、またはGoogleマップのURL）。</p>
+          </div>
           <div class="cta" style="align-items:center">
             <input type="email" id="memo-email" placeholder="example@your-shop.jp"
                    style="font:inherit;padding:10px 12px;border:1px solid #cfd8d2;border-radius:9px;min-width:16em">
-            <button class="btn btn--ghost" id="memo-email-send" type="button">このアドレスに送る</button>
+            <button class="btn btn--ghost" id="memo-email-send" type="button">送信する</button>
           </div>
-          <p class="cap" id="memo-mail-done" style="display:none;color:#1f5c23">送付先を承りました。ありがとうございます。</p>
+          <p class="cap" id="memo-mail-error" style="display:none;color:#b3261e">ご記入内容をご確認ください。</p>
+          <p class="cap" id="memo-mail-done" style="display:none;color:#1f5c23">承りました。ありがとうございます。2〜3営業日でお送りします。</p>
         </div>
       </div>
 
@@ -164,18 +170,21 @@
   var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse';
   // 受付番号(?r=)は案内メール/フォーム経由のみ付く。無い場合（サイト内から直接来た人）は
   // 閲覧計測は行わず、申込だけ受け付ける（誰か分からないのでメールアドレスを必須にする）。
-  var r = null, tracked = false, needMail = false;
+  var r = null, tracked = false, needMail = false, needShop = false;
   try {
     var sp = new URLSearchParams(location.search);
     var q = sp.get('r');
     if (q && /^[A-Za-z0-9\-]{4,40}$/.test(q)) { r = q; tracked = true; }
-    // c=f はフォームからご案内した相手（こちらはメールアドレスを持っていない）
+    // c=f はフォームからご案内した相手（こちらはメールアドレスを持っていない。
+    // ただしGoogleマップ掲載はこちらで把握しているので店舗情報は不要）
     if (sp.get('c') === 'f') needMail = true;
   } catch (e) { /* no-op */ }
   if (!r) {
     // サイトから直接いらした方。誰か分からないので、申込ごとに一時IDを振って
     // 別々の申込として記録し、送付先メールアドレスを必須にする
+    // 受付番号がない＝どのお店か分からないため、送付先に加えて店舗情報も必要
     needMail = true;
+    needShop = true;
     try {
       r = sessionStorage.getItem('ml_direct_id');
       if (!r) {
@@ -209,12 +218,24 @@
   // 送信は同一セッション1回だけ（sendのdedupeに依存せず二重送信も防ぐ）。
   var memo = document.getElementById('memo-cta');
   var done = document.getElementById('memo-done');
+  if (needShop) {
+    var cap0 = document.getElementById('memo-cap');
+    if (cap0) cap0.textContent = 'お届け先とお店の情報だけご記入いただければ完了します（30秒）。';
+  }
   if (memo && done) {
     memo.addEventListener('click', function () {
       memo.disabled = true;
       send('sample_memo_request');
-      if (needMail) {
-        var lbl = document.getElementById('memo-mail-label');
+      var lbl = document.getElementById('memo-mail-label');
+      if (needShop) {
+        // どのお店か分からないと作成できないため、この2項目で受付を完了する
+        document.getElementById('memo-done-msg').textContent =
+          'あと1ステップです。お届け先とお店の情報をご記入ください。';
+        document.getElementById('memo-shop-row').style.display = '';
+        if (lbl) lbl.textContent = 'お届け先のメールアドレス';
+        var shop = document.getElementById('memo-shop');
+        if (shop) setTimeout(function () { shop.focus(); }, 300);
+      } else if (needMail) {
         if (lbl) lbl.textContent = 'お届け先のメールアドレスをご記入ください。ご記入がないとメモをお送りできません。';
         var inp = document.getElementById('memo-email');
         if (inp) setTimeout(function () { inp.focus(); }, 300);
@@ -233,15 +254,30 @@
   if (mailBtn) {
     mailBtn.addEventListener('click', function () {
       var input = document.getElementById('memo-email');
+      var shopInput = document.getElementById('memo-shop');
       var v = (input && input.value || '').trim();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
-        if (input) input.focus();
+      var shopVal = (shopInput && shopInput.value || '').trim();
+      var err = document.getElementById('memo-mail-error');
+      var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      var okShop = !needShop || shopVal.length >= 2;
+      if (!okMail || !okShop) {
+        if (err) {
+          err.textContent = !okShop ? '店名またはGoogleマップのURLをご記入ください。'
+                                    : 'メールアドレスをご確認ください。';
+          err.style.display = '';
+        }
+        (!okShop ? shopInput : input).focus();
         return;
       }
+      if (err) err.style.display = 'none';
       mailBtn.disabled = true;
       send('sample_memo_email::' + v);
+      if (shopVal) send('sample_memo_shop::' + shopVal.slice(0, 200));
       document.getElementById('memo-mail-label').style.display = 'none';
+      document.getElementById('memo-shop-row').style.display = 'none';
       input.parentNode.style.display = 'none';
+      document.getElementById('memo-done-msg').textContent =
+        'お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。';
       document.getElementById('memo-mail-done').style.display = '';
     });
   }
