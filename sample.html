@@ -118,11 +118,26 @@
     <div class="container container--doc">
       <h2>まずは、あなたのお店の改善メモを無料でお送りします</h2>
       <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
-      <div class="cta">
-        <a class="btn btn--primary" id="memo-cta" href="mailto:info@machi-lift.com?subject=%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E5%B8%8C%E6%9C%9B">専用の改善メモを無料で受け取る</a>
+      <div class="cta" id="memo-cta-wrap">
+        <button class="btn btn--primary" id="memo-cta" type="button">専用の改善メモを無料で受け取る</button>
         <a class="btn btn--ghost" href="index.html#contact">まずは相談する</a>
       </div>
-      <p class="cap">ボタンを押すとメールソフトが開き、件名に「サンプル希望」が入ります。そのまま送信いただければ、内容の記入は不要です。うまく開かない場合は info@machi-lift.com へ「サンプル希望」とご連絡ください。</p>
+      <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
+
+      <div id="memo-done" style="display:none">
+        <p style="font-weight:700;color:#1f5c23;background:#e8f3e9;border:1px solid #c6e2c8;border-radius:10px;padding:12px 14px;margin:0 0 12px">
+          お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。
+        </p>
+        <div id="memo-mail-block">
+          <p class="cap" id="memo-mail-label">送付先のメールアドレス（任意）。ご記入いただくと確実にお届けできます。</p>
+          <div class="cta" style="align-items:center">
+            <input type="email" id="memo-email" placeholder="example@your-shop.jp"
+                   style="font:inherit;padding:10px 12px;border:1px solid #cfd8d2;border-radius:9px;min-width:16em">
+            <button class="btn btn--ghost" id="memo-email-send" type="button">このアドレスに送る</button>
+          </div>
+          <p class="cap" id="memo-mail-done" style="display:none;color:#1f5c23">送付先を承りました。ありがとうございます。</p>
+        </div>
+      </div>
 
       <h3 style="margin-top:2.2rem">レポート本編をご希望の場合</h3>
       <p>導入価格 税込9,800円・必要情報のご提供後1〜3営業日でお届けします。</p>
@@ -147,11 +162,14 @@
 // 「開いたが返信しない」層の内訳（即離脱／読了して迷う／CTAまで到達）を判別するため。
 (function () {
   var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse';
-  var r;
+  // 受付番号(?r=)は案内メール/フォーム経由のみ付く。無い場合（サイト内から直接来た人）は
+  // 閲覧計測は行わず、申込だけ受け付ける（誰か分からないのでメールアドレスを必須にする）。
+  var r = null, tracked = false;
   try {
-    r = new URLSearchParams(location.search).get('r');
-    if (!r || !/^[A-Za-z0-9\-]{4,40}$/.test(r)) return;
-  } catch (e) { return; }
+    var q = new URLSearchParams(location.search).get('r');
+    if (q && /^[A-Za-z0-9\-]{4,40}$/.test(q)) { r = q; tracked = true; }
+  } catch (e) { /* no-op */ }
+  if (!r) r = 'DIRECT';
 
   // 同一セッションで同じイベントは1回だけ送る
   function send(kind) {
@@ -168,24 +186,54 @@
     } catch (e) { /* no-op */ }
   }
 
-  setTimeout(function () {
+  if (tracked) setTimeout(function () {
     if (document.visibilityState === 'visible') send('sample_view');
   }, 1500);
 
-  // 無料メモCTA: 案内経由(?r=)なら件名に受付番号を入れて誰からの依頼か判別できるようにする
+  // 無料メモの申込: ボタン押下でその場で受付完了（メールソフトは開かない）。
+  // 誰からの申込かは案内URLの受付番号(?r=)で判別できるので入力は不要。
+  // 送信は同一セッション1回だけ（sendのdedupeに依存せず二重送信も防ぐ）。
   var memo = document.getElementById('memo-cta');
-  if (memo) {
-    memo.href = 'mailto:info@machi-lift.com'
-      + '?subject=' + encodeURIComponent('サンプル希望（' + r + '）')
-      + '&body=' + encodeURIComponent(
-          'まちのWeb改善室 ご担当者さま\n\n'
-          + '専用の改善メモ（無料）を希望します。\nこのまま送信いただければ結構です。\n\n'
-          + '受付番号: ' + r + '\n');
+  var done = document.getElementById('memo-done');
+  if (memo && done) {
+    memo.addEventListener('click', function () {
+      memo.disabled = true;
+      send('sample_memo_request');
+      if (!tracked) {
+        var lbl = document.getElementById('memo-mail-label');
+        if (lbl) lbl.textContent = 'お届け先のメールアドレスをご記入ください（このページから直接お申し込みの場合は必須です）。';
+      }
+      document.getElementById('memo-cta-wrap').style.display = 'none';
+      var cap = document.getElementById('memo-cap');
+      if (cap) cap.style.display = 'none';
+      done.style.display = '';
+      done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  // 任意のメールアドレス。回答シートの batch 欄にサフィックス記法で載せる
+  // （既存の `cf_live::excluded_form_defect` と同じエンコード規約）。
+  var mailBtn = document.getElementById('memo-email-send');
+  if (mailBtn) {
+    mailBtn.addEventListener('click', function () {
+      var input = document.getElementById('memo-email');
+      var v = (input && input.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+        if (input) input.focus();
+        return;
+      }
+      mailBtn.disabled = true;
+      send('sample_memo_email::' + v);
+      document.getElementById('memo-mail-label').style.display = 'none';
+      input.parentNode.style.display = 'none';
+      document.getElementById('memo-mail-done').style.display = '';
+    });
   }
 
   // 読了度: 表示領域の下端がページの50%/90%に達したら記録
   var fired = {};
   function onScroll() {
+    if (!tracked) return;
     var h = document.documentElement.scrollHeight - window.innerHeight;
     if (h <= 0) return;
     var pct = (window.scrollY / h) * 100;
@@ -196,10 +244,10 @@
 
   // CTA: 申込（Stripe）／相談 の押下
   document.addEventListener('click', function (ev) {
+    if (!tracked) return;
     var a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
     if (!a || !a.href) return;
-    if (a.id === 'memo-cta' || a.href.indexOf('mailto:info@machi-lift.com') === 0) send('sample_cta_memo');
-    else if (a.href.indexOf('buy.stripe.com') !== -1) send('sample_cta_pay');
+    if (a.href.indexOf('buy.stripe.com') !== -1) send('sample_cta_pay');
     else if (a.getAttribute('href') === 'index.html#contact') send('sample_cta_consult');
   }, true);
 })();
