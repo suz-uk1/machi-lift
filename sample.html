@@ -164,12 +164,26 @@
   var FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe4HE7wsW8ssGCA9lkGevn99evNdT7o0X-VBo_Sbezyt8BHsw/formResponse';
   // 受付番号(?r=)は案内メール/フォーム経由のみ付く。無い場合（サイト内から直接来た人）は
   // 閲覧計測は行わず、申込だけ受け付ける（誰か分からないのでメールアドレスを必須にする）。
-  var r = null, tracked = false;
+  var r = null, tracked = false, needMail = false;
   try {
-    var q = new URLSearchParams(location.search).get('r');
+    var sp = new URLSearchParams(location.search);
+    var q = sp.get('r');
     if (q && /^[A-Za-z0-9\-]{4,40}$/.test(q)) { r = q; tracked = true; }
+    // c=f はフォームからご案内した相手（こちらはメールアドレスを持っていない）
+    if (sp.get('c') === 'f') needMail = true;
   } catch (e) { /* no-op */ }
-  if (!r) r = 'DIRECT';
+  if (!r) {
+    // サイトから直接いらした方。誰か分からないので、申込ごとに一時IDを振って
+    // 別々の申込として記録し、送付先メールアドレスを必須にする
+    needMail = true;
+    try {
+      r = sessionStorage.getItem('ml_direct_id');
+      if (!r) {
+        r = 'DIRECT-' + Math.random().toString(36).slice(2, 10);
+        sessionStorage.setItem('ml_direct_id', r);
+      }
+    } catch (e) { r = 'DIRECT-' + Math.random().toString(36).slice(2, 10); }
+  }
 
   // 同一セッションで同じイベントは1回だけ送る
   function send(kind) {
@@ -199,9 +213,11 @@
     memo.addEventListener('click', function () {
       memo.disabled = true;
       send('sample_memo_request');
-      if (!tracked) {
+      if (needMail) {
         var lbl = document.getElementById('memo-mail-label');
-        if (lbl) lbl.textContent = 'お届け先のメールアドレスをご記入ください（このページから直接お申し込みの場合は必須です）。';
+        if (lbl) lbl.textContent = 'お届け先のメールアドレスをご記入ください。ご記入がないとメモをお送りできません。';
+        var inp = document.getElementById('memo-email');
+        if (inp) setTimeout(function () { inp.focus(); }, 300);
       }
       document.getElementById('memo-cta-wrap').style.display = 'none';
       var cap = document.getElementById('memo-cap');
