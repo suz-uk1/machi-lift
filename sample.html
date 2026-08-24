@@ -7,6 +7,28 @@
 <meta name="description" content="Googleマップ掲載改善パックで実際にお届けしたレポートの一部を、店舗が特定されない形に編集して公開しています。レポートの構成と、説明文改善のBefore/Afterサンプルをご覧いただけます。">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=20260731a">
+<style>
+  .offers { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; margin-top:18px; }
+  .offer { background:#fff; border:1px solid #dfe6e2; border-radius:14px; padding:20px 22px; }
+  .offer--free { border:2px solid #2f6e4f; box-shadow:0 4px 18px rgba(47,110,79,.10); }
+  .offer h3 { margin:10px 0 8px; }
+  .offer-tag { display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.04em;
+               background:#eef2f5; color:#41525e; border-radius:999px; padding:3px 12px; }
+  .offer-tag--free { background:#2f6e4f; color:#fff; }
+  .offer-spec { list-style:none; padding:0; margin:12px 0 16px; font-size:.9rem; color:#4a5750; }
+  .offer-spec li { padding:3px 0 3px 18px; position:relative; }
+  .offer-spec li::before { content:"・"; position:absolute; left:2px; }
+  .memo-ok { font-weight:700; color:#1f5c23; background:#e8f3e9; border:1px solid #c6e2c8;
+             border-radius:10px; padding:12px 14px; margin:14px 0 12px; }
+  .field { margin:0 0 14px; text-align:left; }
+  .field-label { display:block; font-size:.86rem; font-weight:700; margin:0 0 6px; }
+  .field-row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .field-input { font:inherit; padding:10px 12px; border:1px solid #cfd8d2; border-radius:9px;
+                 width:100%; max-width:26em; }
+  .field-help { margin:5px 0 0; }
+  .btn--lg { padding:14px 28px; font-size:1rem; }
+  @media (max-width:760px) { .offers { grid-template-columns:1fr; } }
+</style>
 </head>
 <body>
 <header class="site-header"><div class="container">
@@ -23,17 +45,22 @@
     <div class="container">
       <h1>納品レポートサンプル</h1>
       <p>「Googleマップ掲載改善パック」で実際にお届けしたレポートの一部を、店舗が特定されないよう内容を編集したうえで公開しています。</p>
-      <p style="margin:14px 0 0">
-        <button class="btn btn--primary memo-cta-btn" type="button">あなたのお店の改善メモを無料で受け取る</button>
-        <span class="cap" style="display:block;margin:6px 0 0">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</span>
-      </p>
+    </div>
+  </section>
+
+  <section class="section section--soft reveal" id="free-memo">
+    <div class="container container--doc" style="text-align:center">
+      <h2>あなた専用の改善メモサンプルも無料でお作りします</h2>
+      <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
+      <p style="margin:18px 0 0"><button class="btn btn--primary btn--lg memo-cta-btn" type="button">無料お申し込みはこちら</button></p>
+      <p class="cap" style="margin:10px 0 0">※ このページで以下にご紹介しているのは、有料の「レポート本編」（全12章・PDF）です。無料の改善メモは、その中から要点3〜5点をまとめたダイジェスト版です。</p>
     </div>
   </section>
 
   <section class="section reveal" id="shots">
     <div class="container container--doc sample">
-      <h2>納品物のイメージ</h2>
-      <p class="lead">ご依頼ごとに内容は変わりますが、こうしたレポート（PDF・十数ページ）としてお届けします。</p>
+      <h2>レポート本編（有料）の納品イメージ</h2>
+      <p class="lead">ここから下は、税込9,800円の「レポート本編」の内容です。ご依頼ごとに内容は変わりますが、こうしたレポート（PDF・十数ページ）としてお届けします。</p>
       <div class="shots">
         <img src="assets/report-1.png" alt="納品レポートのイメージ">
         <img src="assets/report-2.png" alt="納品レポートのイメージ">
@@ -126,41 +153,62 @@
 
   <section class="section section--soft reveal" id="cta">
     <div class="container container--doc">
-      <h2>まずは、あなたのお店の改善メモを無料でお送りします</h2>
-      <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
-      <div class="cta" id="memo-cta-wrap">
-        <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">専用の改善メモを無料で受け取る</button>
-        <a class="btn btn--ghost" href="index.html#contact">まずは相談する</a>
-      </div>
-      <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
+      <h2 style="text-align:center">2つのご案内があります</h2>
+      <div class="offers">
 
-      <div id="memo-done" style="display:none">
-        <p id="memo-done-msg" style="font-weight:700;color:#1f5c23;background:#e8f3e9;border:1px solid #c6e2c8;border-radius:10px;padding:12px 14px;margin:0 0 12px">
-          お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。
-        </p>
-        <div id="memo-mail-block">
-          <p class="cap" id="memo-mail-label">送付先のメールアドレス（任意）。ご記入いただくと確実にお届けできます。</p>
-          <div id="memo-shop-row" style="display:none;margin:0 0 10px">
-            <input type="text" id="memo-shop" placeholder="店名、またはGoogleマップのURL"
-                   style="font:inherit;padding:10px 12px;border:1px solid #cfd8d2;border-radius:9px;width:100%;max-width:32em">
-            <p class="cap" style="margin:4px 0 0">どのお店の掲載を拝見すればよいか分かる情報をご記入ください（店名＋市区町村、またはGoogleマップのURL）。</p>
+        <div class="offer offer--free">
+          <span class="offer-tag offer-tag--free">無料</span>
+          <h3>あなた専用の改善メモ</h3>
+          <p>Googleマップの掲載を拝見して、改善のご提案を<strong>3〜5点</strong>にまとめてお送りします。</p>
+          <ul class="offer-spec">
+            <li>お届け：2〜3営業日</li>
+            <li>形式：Webページ（メールでURLをお送りします）</li>
+            <li>費用：無料</li>
+          </ul>
+          <div class="cta" id="memo-cta-wrap">
+            <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">無料お申し込みはこちら</button>
           </div>
-          <div class="cta" style="align-items:center">
-            <input type="email" id="memo-email" placeholder="example@your-shop.jp"
-                   style="font:inherit;padding:10px 12px;border:1px solid #cfd8d2;border-radius:9px;min-width:16em">
-            <button class="btn btn--ghost" id="memo-email-send" type="button">送信する</button>
+          <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
+
+          <div id="memo-done" style="display:none">
+            <p id="memo-done-msg" class="memo-ok">お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。</p>
+            <div id="memo-mail-block">
+              <div id="memo-shop-row" class="field" style="display:none">
+                <label class="field-label" for="memo-shop">お店の情報</label>
+                <input type="text" id="memo-shop" class="field-input" placeholder="例）まちのカフェ 福岡市中央区">
+                <p class="cap field-help">どのお店の掲載を拝見すればよいか分かる情報をご記入ください（店名＋市区町村、またはGoogleマップのURL）。</p>
+              </div>
+              <div id="memo-email-row" class="field">
+                <label class="field-label" for="memo-email" id="memo-mail-label">お届け先のメールアドレス（任意）</label>
+                <div class="field-row">
+                  <input type="email" id="memo-email" class="field-input" placeholder="example@your-shop.jp">
+                  <button class="btn btn--ghost" id="memo-email-send" type="button">送信する</button>
+                </div>
+                <p class="cap field-help" id="memo-mail-help">ご記入いただくと確実にお届けできます。</p>
+              </div>
+              <p class="cap" id="memo-mail-error" style="display:none;color:#b3261e">ご記入内容をご確認ください。</p>
+              <p class="cap" id="memo-mail-done" style="display:none;color:#1f5c23">承りました。ありがとうございます。2〜3営業日でお送りします。</p>
+            </div>
           </div>
-          <p class="cap" id="memo-mail-error" style="display:none;color:#b3261e">ご記入内容をご確認ください。</p>
-          <p class="cap" id="memo-mail-done" style="display:none;color:#1f5c23">承りました。ありがとうございます。2〜3営業日でお送りします。</p>
         </div>
-      </div>
 
-      <h3 style="margin-top:2.2rem">レポート本編をご希望の場合</h3>
-      <p>導入価格 税込9,800円・必要情報のご提供後1〜3営業日でお届けします。</p>
-      <div class="cta">
-        <a class="btn btn--ghost" href="https://buy.stripe.com/7sYbJ25mU6V95kP9gI53O0j" target="_blank" rel="noopener">このレポートを申し込む（税込9,800円）</a>
+        <div class="offer offer--paid">
+          <span class="offer-tag">税込 9,800円</span>
+          <h3>レポート本編</h3>
+          <p>このページでご紹介した<strong>全12章</strong>のレポートを、お店に合わせて作成します。</p>
+          <ul class="offer-spec">
+            <li>お届け：必要情報のご提供後 1〜3営業日</li>
+            <li>形式：PDF（十数ページ）</li>
+            <li>費用：税込9,800円（買い切り・追加費用なし）</li>
+          </ul>
+          <div class="cta">
+            <a class="btn btn--ghost" href="https://buy.stripe.com/7sYbJ25mU6V95kP9gI53O0j" target="_blank" rel="noopener">このレポートを申し込む</a>
+          </div>
+          <p class="cap">お申し込み（クレジットカード決済）後、作成に必要な情報（Googleマップ掲載ページのURLなど）を決済時のメールアドレス宛にお伺いします。</p>
+        </div>
+
       </div>
-      <p class="cap">お申し込み（クレジットカード決済）後、作成に必要な情報（Googleマップ掲載ページのURLなど）を決済時のメールアドレス宛にお伺いし、ご提供いただいてから1〜3営業日でお届けします。</p>
+      <p class="cap" style="text-align:center;margin-top:18px">まずは無料の改善メモだけでも問題ありません。無理な売り込みはいたしません。</p>
     </div>
   </section>
 
@@ -256,16 +304,19 @@
       var topWrap = document.getElementById('memo-cta-top-wrap');
       if (topWrap) topWrap.style.display = 'none';
       var lbl = document.getElementById('memo-mail-label');
+      var help = document.getElementById('memo-mail-help');
       if (needShop) {
         // どのお店か分からないと作成できないため、この2項目で受付を完了する
         document.getElementById('memo-done-msg').textContent =
           'あと1ステップです。お届け先とお店の情報をご記入ください。';
         document.getElementById('memo-shop-row').style.display = '';
         if (lbl) lbl.textContent = 'お届け先のメールアドレス';
+        if (help) help.textContent = 'こちらのアドレスに改善メモをお送りします。';
         var shop = document.getElementById('memo-shop');
         if (shop) setTimeout(function () { shop.focus(); }, 300);
       } else if (needMail) {
-        if (lbl) lbl.textContent = 'お届け先のメールアドレスをご記入ください。ご記入がないとメモをお送りできません。';
+        if (lbl) lbl.textContent = 'お届け先のメールアドレス';
+        if (help) help.textContent = 'ご記入がないとメモをお送りできません。';
         var inp = document.getElementById('memo-email');
         if (inp) setTimeout(function () { inp.focus(); }, 300);
       }
@@ -305,9 +356,8 @@
       mailBtn.disabled = true;
       send('sample_memo_email::' + v);
       if (shopVal) send('sample_memo_shop::' + shopVal.slice(0, 200));
-      document.getElementById('memo-mail-label').style.display = 'none';
       document.getElementById('memo-shop-row').style.display = 'none';
-      input.parentNode.style.display = 'none';
+      document.getElementById('memo-email-row').style.display = 'none';
       document.getElementById('memo-done-msg').textContent =
         'お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。';
       document.getElementById('memo-mail-done').style.display = '';
