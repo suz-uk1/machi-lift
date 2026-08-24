@@ -22,7 +22,8 @@
   .offer > .cap { text-align:left; }
   .offer--free { border:2px solid #2f6e4f; box-shadow:0 4px 18px rgba(47,110,79,.10); }
   .offer h3 { margin:10px 0 8px; }
-  .offer-tag { display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.04em;
+  .offer-tag { display:inline-block; align-self:flex-start;
+               font-size:.78rem; font-weight:700; letter-spacing:.04em;
                background:#eef2f5; color:#41525e; border-radius:999px; padding:3px 12px; }
   .offer-tag--free { background:#2f6e4f; color:#fff; }
   .offer-spec { list-style:none; padding:0; margin:12px 0 16px; font-size:.9rem; color:#4a5750; }
@@ -307,7 +308,7 @@
   }
   if (needShop) {
     var cap0 = document.getElementById('memo-cap');
-    if (cap0) cap0.textContent = 'お届け先とお店の情報だけご記入いただければ完了します（30秒）。';
+    if (cap0) cap0.textContent = 'お届け先のメールアドレスとお店の情報をご記入いただくとサンプルをお届けできます。';
   }
   if (memo && done) {
     var onApply = function () {
