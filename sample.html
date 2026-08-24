@@ -94,6 +94,12 @@
         </div>
         <p class="cap">※ 実際のレポートでは、このあとに全文の説明文案と、避けたい表現の注意点が続きます。</p>
 
+        <div id="memo-cta-top-wrap" style="background:#eef5f0;border:1px solid #cfe0d6;border-radius:12px;padding:16px 18px;margin:20px 0 4px">
+          <p style="font-weight:700;margin:0 0 4px">同じものを、あなたのお店向けに無料でお送りします</p>
+          <p class="cap" style="margin:0 0 12px">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
+          <button class="btn btn--primary memo-cta-btn" type="button">専用の改善メモを無料で受け取る</button>
+        </div>
+
         <div class="blurwrap" aria-hidden="true">
           <div class="blurred">
             <p class="doc-chapter">8. 写真の追加・並び替え案</p>
@@ -119,7 +125,7 @@
       <h2>まずは、あなたのお店の改善メモを無料でお送りします</h2>
       <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
       <div class="cta" id="memo-cta-wrap">
-        <button class="btn btn--primary" id="memo-cta" type="button">専用の改善メモを無料で受け取る</button>
+        <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">専用の改善メモを無料で受け取る</button>
         <a class="btn btn--ghost" href="index.html#contact">まずは相談する</a>
       </div>
       <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
@@ -216,16 +222,35 @@
   // 無料メモの申込: ボタン押下でその場で受付完了（メールソフトは開かない）。
   // 誰からの申込かは案内URLの受付番号(?r=)で判別できるので入力は不要。
   // 送信は同一セッション1回だけ（sendのdedupeに依存せず二重送信も防ぐ）。
-  var memo = document.getElementById('memo-cta');
+  var memoButtons = document.querySelectorAll('.memo-cta-btn');
+  var memo = memoButtons[0] || null;
   var done = document.getElementById('memo-done');
+
+  // 「申込ボタンが実際に画面に入ったか」を直接計測する。
+  // スクロール率より正確に「見たが押さなかった / そもそも見ていない」を分離できる。
+  if (tracked && 'IntersectionObserver' in window) {
+    var seen = false;
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting && !seen) {
+          seen = true;
+          send('sample_cta_seen');
+          io.disconnect();
+        }
+      }
+    }, { threshold: 0.4 });
+    for (var b = 0; b < memoButtons.length; b++) io.observe(memoButtons[b]);
+  }
   if (needShop) {
     var cap0 = document.getElementById('memo-cap');
     if (cap0) cap0.textContent = 'お届け先とお店の情報だけご記入いただければ完了します（30秒）。';
   }
   if (memo && done) {
-    memo.addEventListener('click', function () {
-      memo.disabled = true;
+    var onApply = function () {
+      for (var i = 0; i < memoButtons.length; i++) memoButtons[i].disabled = true;
       send('sample_memo_request');
+      var topWrap = document.getElementById('memo-cta-top-wrap');
+      if (topWrap) topWrap.style.display = 'none';
       var lbl = document.getElementById('memo-mail-label');
       if (needShop) {
         // どのお店か分からないと作成できないため、この2項目で受付を完了する
@@ -245,7 +270,10 @@
       if (cap) cap.style.display = 'none';
       done.style.display = '';
       done.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
+    };
+    for (var i = 0; i < memoButtons.length; i++) {
+      memoButtons[i].addEventListener('click', onApply);
+    }
   }
 
   // 任意のメールアドレス。回答シートの batch 欄にサフィックス記法で載せる
