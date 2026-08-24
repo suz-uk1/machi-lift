@@ -8,7 +8,14 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=20260731a">
 <style>
-  .offers { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; margin-top:18px; }
+  .offers { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:stretch; margin-top:18px; }
+  .offer { display:flex; flex-direction:column; }
+  .offer > .cap:last-child { margin-top:auto; }
+  .free-card { background:#fff; border:2px solid #2f6e4f; border-radius:14px;
+               padding:26px 28px; text-align:center;
+               box-shadow:0 4px 18px rgba(47,110,79,.10); }
+  .free-card h2 { margin:12px 0 8px; }
+  .note { font-size:.78rem; line-height:1.7; color:#6b756f; margin:14px 0 0; }
   .offer { background:#fff; border:1px solid #dfe6e2; border-radius:14px; padding:20px 22px;
            text-align:left; }
   .offer .cta { display:flex; justify-content:center; margin:16px 0 0; }
@@ -52,18 +59,21 @@
   </section>
 
   <section class="section section--soft reveal" id="free-memo">
-    <div class="container container--doc" style="text-align:center">
-      <h2>あなた専用の改善メモサンプルも無料でお作りします</h2>
-      <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
-      <p style="margin:18px 0 0"><button class="btn btn--primary btn--lg memo-cta-btn" type="button">無料お申し込みはこちら</button></p>
-      <p class="cap" style="margin:10px 0 0">※ このページで以下にご紹介しているのは、有料の「レポート本編」（全12章・PDF）です。無料の改善メモは、その中から要点3〜5点をまとめたダイジェスト版です。</p>
+    <div class="container container--doc">
+      <div class="free-card">
+        <span class="offer-tag offer-tag--free">無料</span>
+        <h2>あなた専用のサンプルも無料でお作りします</h2>
+        <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
+        <p style="margin:18px 0 0"><button class="btn btn--primary btn--lg memo-cta-btn" type="button">無料お申し込みはこちら</button></p>
+        <p class="note">※ このページで以下にご紹介しているのは「レポート本編」（全12章・PDF）です。無料のサンプルは、その中から要点3〜5点をまとめたダイジェスト版です。</p>
+      </div>
     </div>
   </section>
 
   <section class="section reveal" id="shots">
     <div class="container container--doc sample">
-      <h2>レポート本編（有料）の納品イメージ</h2>
-      <p class="lead">ここから下は、税込9,800円の「レポート本編」の内容です。ご依頼ごとに内容は変わりますが、こうしたレポート（PDF・十数ページ）としてお届けします。</p>
+      <h2>レポート本編の納品イメージ</h2>
+      <p class="lead">ご依頼ごとに内容は変わりますが、こうしたレポート（PDF・十数ページ）としてお届けします。</p>
       <div class="shots">
         <img src="assets/report-1.png" alt="納品レポートのイメージ">
         <img src="assets/report-2.png" alt="納品レポートのイメージ">
@@ -156,12 +166,12 @@
 
   <section class="section section--soft reveal" id="cta">
     <div class="container container--doc">
-      <h2 style="text-align:center">2つのご案内があります</h2>
+      <h2 style="text-align:center">料金</h2>
       <div class="offers">
 
         <div class="offer offer--free">
           <span class="offer-tag offer-tag--free">無料</span>
-          <h3>あなた専用の改善メモ</h3>
+          <h3>あなた専用のサンプル</h3>
           <p>Googleマップの掲載を拝見して、改善のご提案を<strong>3〜5点</strong>にまとめてお送りします。</p>
           <ul class="offer-spec">
             <li>お届け：2〜3営業日</li>
@@ -171,7 +181,7 @@
           <div class="cta" id="memo-cta-wrap">
             <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">無料お申し込みはこちら</button>
           </div>
-          <p class="cap" id="memo-cap">ボタンを押すだけでお申し込みは完了します（入力・登録は不要です）。</p>
+          <p class="cap" id="memo-cap">お届け先のメールアドレスとお店の情報をご記入いただくとサンプルをお届けできます。</p>
 
           <div id="memo-done" style="display:none">
             <p id="memo-done-msg" class="memo-ok">お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。</p>
@@ -211,7 +221,6 @@
         </div>
 
       </div>
-      <p class="cap" style="text-align:center;margin-top:18px">まずは無料の改善メモだけでも問題ありません。無理な売り込みはいたしません。</p>
     </div>
   </section>
 
