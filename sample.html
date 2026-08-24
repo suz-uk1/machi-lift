@@ -9,14 +9,17 @@
 <link rel="stylesheet" href="styles.css?v=20260731a">
 <style>
   .offers { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; margin-top:18px; }
-  .offer { background:#fff; border:1px solid #dfe6e2; border-radius:14px; padding:20px 22px; }
+  .offer { background:#fff; border:1px solid #dfe6e2; border-radius:14px; padding:20px 22px;
+           text-align:left; }
+  .offer .cta { display:flex; justify-content:center; margin:16px 0 0; }
+  .offer > .cap { text-align:left; }
   .offer--free { border:2px solid #2f6e4f; box-shadow:0 4px 18px rgba(47,110,79,.10); }
   .offer h3 { margin:10px 0 8px; }
   .offer-tag { display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.04em;
                background:#eef2f5; color:#41525e; border-radius:999px; padding:3px 12px; }
   .offer-tag--free { background:#2f6e4f; color:#fff; }
   .offer-spec { list-style:none; padding:0; margin:12px 0 16px; font-size:.9rem; color:#4a5750; }
-  .offer-spec li { padding:3px 0 3px 18px; position:relative; }
+  .offer-spec li { padding:3px 0 3px 18px; position:relative; text-align:left; }
   .offer-spec li::before { content:"・"; position:absolute; left:2px; }
   .memo-ok { font-weight:700; color:#1f5c23; background:#e8f3e9; border:1px solid #c6e2c8;
              border-radius:10px; padding:12px 14px; margin:14px 0 12px; }
