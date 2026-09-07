@@ -312,7 +312,10 @@
   if (memo && done) {
     var onApply = function () {
       for (var i = 0; i < memoButtons.length; i++) memoButtons[i].disabled = true;
-      send('sample_memo_request');
+      // 直接来訪の方は、この時点では誰か分からずメモを作れない。
+      // 申込確定(sample_memo_request)は送付先入力の完了時に送り、
+      // ここでは開始のみ記録する（2026-09-06に連絡先不明の申込が1件発生した対策）。
+      send(needShop ? 'sample_memo_start' : 'sample_memo_request');
       var topWrap = document.getElementById('memo-cta-top-wrap');
       if (topWrap) topWrap.style.display = 'none';
       var lbl = document.getElementById('memo-mail-label');
@@ -320,7 +323,7 @@
       if (needShop) {
         // どのお店か分からないと作成できないため、この2項目で受付を完了する
         document.getElementById('memo-done-msg').textContent =
-          'あと1ステップです。お届け先とお店の情報をご記入ください。';
+          'あと1ステップで完了です。お届け先とお店の情報をご記入ください（未記入の場合はお届けできません）。';
         document.getElementById('memo-shop-row').style.display = '';
         if (lbl) lbl.textContent = 'お届け先のメールアドレス';
         if (help) help.textContent = 'こちらのアドレスに改善メモをお送りします。';
@@ -366,6 +369,7 @@
       }
       if (err) err.style.display = 'none';
       mailBtn.disabled = true;
+      if (needShop) send('sample_memo_request');
       send('sample_memo_email::' + v);
       if (shopVal) send('sample_memo_shop::' + shopVal.slice(0, 200));
       document.getElementById('memo-shop-row').style.display = 'none';
