@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>document.documentElement.classList.add('js')</script>
-<title>無料の改善メモと改善Sprintのご案内｜まちのWeb改善室（machi-lift）</title>
-<meta name="description" content="Googleマップの掲載を拝見して、すぐ直せる点を3〜5点にまとめた無料の改善メモをお送りします。反映までお任せいただく場合は、全項目点検・文案作成・反映作業を行う「Googleマップ改善Sprint」（税込49,800円）をご用意しています。">
+<title>改善レポートのサンプルとSprintのご案内｜まちのWeb改善室（machi-lift）</title>
+<meta name="description" content="近隣の同業他社のリサーチ・比較分析をふまえた改善レポートのご案内です。改善レポートの一部を、改善ポイント3〜5点の無料サンプルとしてお作りします。反映までお任せいただく場合は、改善レポート全体の作成とGoogleマップへの反映作業を行う「Googleマップ改善Sprint」（税込49,800円）をご用意しています。">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css?v=20260731a">
 <style>
@@ -38,7 +38,11 @@
                  width:100%; max-width:26em; }
   .field-help { margin:5px 0 0; }
   .btn--lg { padding:14px 28px; font-size:1rem; }
-  @media (max-width:760px) { .offers { grid-template-columns:1fr; } }
+  .hero .free-card p.lead { margin:0 auto; }
+  .hero .free-card p.note { margin:14px auto 0; }
+  @media (max-width:760px) { .offers { grid-template-columns:1fr; }
+    .hero--sub { padding:36px 0 32px; } .hero--sub h1 { font-size:1.6rem; }
+    .free-card { padding:20px 18px; } .free-card h2 { font-size:1.2rem; } }
 </style>
 </head>
 <body>
@@ -52,38 +56,50 @@
 </div></header>
 <main>
 
-  <section class="hero hero--sub">
-    <div class="container">
-      <h1>無料の改善メモと、改善Sprintのご案内</h1>
-      <p>Googleマップの掲載を拝見して「何を直すか」を3〜5点にまとめた無料の改善メモと、点検・文案作成・反映作業まで行う「Googleマップ改善Sprint」の違いをご説明します。文例は実際にお届けした内容を、店舗が特定されないよう編集したものです。</p>
+  <section class="hero hero--sub" id="free-memo">
+    <div class="container container--doc">
+      <h1>改善レポートのサンプルと、Sprintのご案内</h1>
+      <p>近隣の同業他社のリサーチ・比較分析をふまえた「改善レポート」の内容と、ご希望に応じてGoogleマップへの反映まで行う「Googleマップ改善Sprint」をご案内します。</p>
+      <div class="free-card" style="margin-top:20px">
+        <span class="offer-tag offer-tag--free">無料</span>
+        <h2>改善レポートのサンプル（無料）をお作りします</h2>
+        <p class="lead">改善レポートの一部を、あなたのお店・事業所専用の無料サンプル（改善ポイント3〜5点）としてお作りし、2〜3営業日でお送りします。</p>
+        <p style="margin:18px 0 0"><button class="btn btn--primary btn--lg memo-cta-btn" type="button">無料サンプルを申し込む</button></p>
+        <p class="note">※ 無料サンプルは「何を直すか」を改善ポイント3〜5点に絞ってお伝えするものです。改善レポート全体の作成とGoogleマップへの反映までをお任せいただく場合は、このページ下部の「Googleマップ改善Sprint」をご覧ください。</p>
+      </div>
     </div>
   </section>
 
-  <section class="section section--soft reveal" id="free-memo">
+  <section class="section section--soft reveal" id="report">
     <div class="container container--doc">
-      <div class="free-card">
-        <span class="offer-tag offer-tag--free">無料</span>
-        <h2>あなた専用のサンプルも無料でお作りします</h2>
-        <p class="lead">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
-        <p style="margin:18px 0 0"><button class="btn btn--primary btn--lg memo-cta-btn" type="button">無料お申し込みはこちら</button></p>
-        <p class="note">※ 無料の改善メモは「何を直すか」を3〜5点に絞ってお伝えするものです。全項目の点検から文案作成、Googleマップへの反映作業までをお任せいただく場合は、このページ下部の「Googleマップ改善Sprint」をご覧ください。</p>
+      <h2>改善レポートの内容</h2>
+      <p class="lead">近隣の同業他社のリサーチ・比較分析をふまえて、Googleマップの掲載で「何を、どの順に、どう直すか」をまとめた資料です。</p>
+      <div class="report-doc">
+        <ol class="toc-list">
+          <li><strong>20項目の点検シート</strong><span>カテゴリ・説明文・サービス・営業時間・リンク・写真・投稿・Q&amp;A・口コミ返信などを、現状・近隣との比較・評価・改善案の形で一覧に</span></li>
+          <li><strong>近隣3〜5店との比較表</strong><span>同じ商圏で比較される同業の候補と並べ、口コミ・写真・情報量・導線のどこで差がついているかを整理</span></li>
+          <li><strong>文案一式</strong><span>説明文・サービス説明・Q&amp;A・投稿文4本・口コミ返信文とルール</span></li>
+          <li><strong>写真の並び替え案と撮影指示</strong><span>先頭に並べる写真と、追加で撮るべき写真の一覧（撮影は含みません）</span></li>
+          <li><strong>Before/After記録</strong><span>反映前後のスクリーンショットと反映項目の一覧</span></li>
+        </ol>
+        <p class="cap">※ 無料サンプルは、この改善レポートの一部（改善ポイント3〜5点）を作成したものです。Sprintは改善レポート全体の作成に加え、ご希望に応じてGoogleマップへの反映まで当方が行います。</p>
       </div>
     </div>
   </section>
 
   <section class="section reveal" id="shots">
     <div class="container container--doc sample">
-      <h2>無料の改善メモで分かること</h2>
-      <p class="lead">Googleマップと公式サイトを実際に拝見し、すぐ手をつけられる点だけを選んでお送りします。たとえば次のようなことです。</p>
+      <h2>無料サンプルで分かること</h2>
+      <p class="lead">Googleマップと公式サイトを拝見し、改善レポートのうち、すぐ手をつけられる点だけを3〜5点選んでお送りします。たとえば次のようなことです。</p>
       <div class="report-doc">
         <ol class="toc-list">
           <li><strong>説明文が未登録、または運用連絡から始まっている</strong><span>最初の数行で「選ぶ理由」が見えていない</span></li>
           <li><strong>写真が少ない・ユーザー投稿だけ・先頭3枚が外観のみ</strong><span>比較されたときに雰囲気が伝わらない</span></li>
-          <li><strong>営業時間・電話・予約リンクが未登録または公式サイトと食い違う</strong><span>来店前の不安と機会損失につながる</span></li>
+          <li><strong>営業時間・電話・予約リンクが未登録または公式サイトと食い違う</strong><span>来店・問い合わせ前の不安と機会損失につながる</span></li>
           <li><strong>カテゴリが1つだけ</strong><span>探される言葉で検索結果に出にくい</span></li>
           <li><strong>口コミへの返信がない、低評価に返信が付いていない</strong><span>これから読む人への説明になっていない</span></li>
         </ol>
-        <p class="cap">※ メモは「拝見した現状」と「改善のご提案」をセットでお伝えします。直すのはお店側で、手順の質問にはメールでお答えします。</p>
+        <p class="cap">※ 無料サンプルでお伝えするのは「何を直すか」（改善ポイント3〜5点の、拝見した現状と改善のご提案）です。サンプルをもとに直すのはお店・事業者様ご自身で、手順のご質問にはメールでお答えします。直す作業まで任せたい場合は、Sprintで改善レポート全体を作成し、Googleマップへの反映まで当方が行います。</p>
       </div>
     </div>
   </section>
@@ -91,7 +107,7 @@
   <section class="section section--soft reveal" id="toc">
     <div class="container container--doc">
       <h2>Googleマップ改善Sprintで行うこと</h2>
-      <p class="lead">「読んだけれど手が回らない」という方のために、点検から反映までを3〜5営業日でまとめて行います。</p>
+      <p class="lead">成果物は「改善レポート＋反映作業」です。改善レポート全体の作成に加え、ご希望に応じてGoogleマップへの反映まで当方が行います。「読んだけれど手が回らない」という方のために、点検から反映までを3〜5営業日でまとめて行います。</p>
       <div class="report-doc">
         <ol class="toc-list">
           <li><strong>全項目点検</strong><span>カテゴリ・説明文・サービス・属性・営業時間・リンク・写真・投稿・Q&amp;A・口コミ返信を一つずつ確認</span></li>
@@ -108,8 +124,8 @@
 
   <section class="section reveal" id="excerpt">
     <div class="container container--doc">
-      <h2>文案の例：「掲載説明文」</h2>
-      <p class="lead">あるドッグサロン様向けに作成した説明文の例です。店名・地名・お店固有の表現は編集しています。無料メモでは「現状」と「改善方向」まで、Sprintでは全文の作成と反映まで行います。</p>
+      <h2>作成例：「掲載説明文」</h2>
+      <p class="lead">ドッグサロンを想定した説明文の作成例です（社内で作成した見本。店名・地名は架空です）。無料サンプルでは「現状」と「改善方向」まで、Sprintでは全文の作成と反映まで行います。</p>
 
       <div class="report-doc">
         <p class="doc-chapter">掲載説明文の改善</p>
@@ -138,9 +154,9 @@
         <p class="cap">※ Sprintでは、このあとに全文の説明文案と避けたい表現の注意点を作成し、Googleマップへ反映します。</p>
 
         <div id="memo-cta-top-wrap" style="background:#eef5f0;border:1px solid #cfe0d6;border-radius:12px;padding:16px 18px;margin:20px 0 4px">
-          <p style="font-weight:700;margin:0 0 4px">同じものを、あなたのお店向けに無料でお送りします</p>
-          <p class="cap" style="margin:0 0 12px">Googleマップの掲載を拝見して、改善のご提案を3〜5点にまとめてお送りします（無料・2〜3営業日）。</p>
-          <button class="btn btn--primary memo-cta-btn" type="button">専用の改善メモを無料で受け取る</button>
+          <p style="font-weight:700;margin:0 0 4px">あなたのお店・事業所向けのサンプルを無料でお作りします</p>
+          <p class="cap" style="margin:0 0 12px">改善レポートの一部を、改善ポイント3〜5点の無料サンプルとしてお送りします（2〜3営業日）。</p>
+          <button class="btn btn--primary memo-cta-btn" type="button">無料サンプルを申し込む</button>
         </div>
 
         <div class="blurwrap" aria-hidden="true">
@@ -170,20 +186,20 @@
 
         <div class="offer offer--free">
           <span class="offer-tag offer-tag--free">無料</span>
-          <h3>あなた専用のサンプル</h3>
-          <p>Googleマップの掲載を拝見して、改善のご提案を<strong>3〜5点</strong>にまとめてお送りします。</p>
+          <h3>改善レポートのサンプル（無料）</h3>
+          <p>改善レポートの一部を、<strong>改善ポイント3〜5点</strong>（拝見した現状と改善のご提案）としてお送りします。</p>
           <ul class="offer-spec">
             <li>お届け：2〜3営業日</li>
             <li>形式：Webページ（メールでURLをお送りします）</li>
             <li>費用：無料</li>
           </ul>
           <div class="cta" id="memo-cta-wrap">
-            <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">無料お申し込みはこちら</button>
+            <button class="btn btn--primary memo-cta-btn" id="memo-cta" type="button">無料サンプルを申し込む</button>
           </div>
           <p class="cap" id="memo-cap">お届け先のメールアドレスとお店の情報をご記入いただくとサンプルをお届けできます。</p>
 
           <div id="memo-done" style="display:none">
-            <p id="memo-done-msg" class="memo-ok">お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。</p>
+            <p id="memo-done-msg" class="memo-ok">お申し込みを受け付けました。2〜3営業日で無料サンプルをお送りします。</p>
             <div id="memo-mail-block">
               <div id="memo-shop-row" class="field" style="display:none">
                 <label class="field-label" for="memo-shop">お店の情報</label>
@@ -207,16 +223,16 @@
         <div class="offer offer--paid">
           <span class="offer-tag">税込 49,800円</span>
           <h3>Googleマップ改善Sprint（反映代行込み）</h3>
-          <p>掲載情報の全項目点検と文案作成に加えて、<strong>Googleマップへの反映作業まで当方が行います</strong>。</p>
+          <p>改善レポート全体の作成に加えて、ご希望に応じて<strong>Googleマップへの反映作業まで当方が行います</strong>。</p>
           <ul class="offer-spec">
             <li>お届け：必要情報のご提供後 3〜5営業日</li>
-            <li>内容：全項目点検・近隣競合比較・説明文／Q&amp;A／投稿文／口コミ返信文の作成・写真の並び替え案・反映作業・Before/After記録</li>
+            <li>内容：改善レポート（20項目の点検シート・近隣3〜5店との比較表・文案一式・写真の並び替え案と撮影指示・Before/After記録）＋反映作業</li>
             <li>費用：税込49,800円（買い切り・追加費用なし。順位や来客数の保証はありません）</li>
           </ul>
           <div class="cta">
             <a class="btn btn--ghost" href="index.html#contact">Sprintを申し込む（準備中・まずはご相談ください）</a>
           </div>
-          <p class="cap">お申し込み（クレジットカード決済）後、必要情報と管理者権限の付与手順（お手続き2分）を決済時のメールアドレス宛にご案内します。権限の付与が難しい場合は、同じ内容を手順書と文案一式としてお渡しします。</p>
+          <p class="cap">決済ページは近日公開です。それまではメールでお申し込みを承ります。お申し込み後、必要情報と管理者権限の付与手順（お手続き2分）をメールでご案内します。権限の付与が難しい場合は、同じ内容を手順書と文案一式としてお渡しします。</p>
         </div>
 
       </div>
@@ -324,12 +340,12 @@
           'あと1ステップで完了です。お届け先とお店の情報をご記入ください（未記入の場合はお届けできません）。';
         document.getElementById('memo-shop-row').style.display = '';
         if (lbl) lbl.textContent = 'お届け先のメールアドレス';
-        if (help) help.textContent = 'こちらのアドレスに改善メモをお送りします。';
+        if (help) help.textContent = 'こちらのアドレスに無料サンプルをお送りします。';
         var shop = document.getElementById('memo-shop');
         if (shop) setTimeout(function () { shop.focus(); }, 300);
       } else if (needMail) {
         if (lbl) lbl.textContent = 'お届け先のメールアドレス';
-        if (help) help.textContent = 'ご記入がないとメモをお送りできません。';
+        if (help) help.textContent = 'ご記入がないとサンプルをお送りできません。';
         var inp = document.getElementById('memo-email');
         if (inp) setTimeout(function () { inp.focus(); }, 300);
       }
@@ -373,7 +389,7 @@
       document.getElementById('memo-shop-row').style.display = 'none';
       document.getElementById('memo-email-row').style.display = 'none';
       document.getElementById('memo-done-msg').textContent =
-        'お申し込みを受け付けました。2〜3営業日で改善メモをお送りします。';
+        'お申し込みを受け付けました。2〜3営業日で無料サンプルをお送りします。';
       document.getElementById('memo-mail-done').style.display = '';
     });
   }
